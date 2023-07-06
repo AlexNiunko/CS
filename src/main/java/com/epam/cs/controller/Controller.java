@@ -8,6 +8,7 @@ import com.epam.cs.command.CommandType;
 import com.epam.cs.command.AttributeName;
 import com.epam.cs.entity.Car;
 import com.epam.cs.exception.CommandException;
+import com.epam.cs.exception.DaoException;
 import com.epam.cs.pool.ConnectionPool;
 import com.epam.cs.command.Router;
 import jakarta.servlet.ServletException;
@@ -51,6 +52,8 @@ public class Controller extends HttpServlet {
         } catch (CommandException | IOException e) {
             logger.error("Command error");
             throw new ServletException(e);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
         }
     }
 

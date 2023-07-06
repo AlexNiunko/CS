@@ -9,12 +9,32 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum CommandType {
-    ADD(new AddUserCommand()),
+    ADD_NEW_USER(new AddNewUserCommand()),
+    ADD_CREDIT_CARD_COMMAND(new AddCreditCardCommand()),
+    GET_ACTIVATION_CODE_COMMAND(new GetRegistrationCodeCommand()),
     LOGIN(new LoginCommand()),
     LOGOUT(new LogoutCommand()),
+    CHANGE_CAR_COMMAND(new ChangeTheCarCommand()),
+    CHOOSE_CASH_PAYMENT_METHOD(new ChooseCashPaymentMethodCommand()),
+    CHANGE_PAYMENT_METHOD(new ChangePaymentMethodCommand()),
     DEFAULT(new DefaultCommand()),
     REGISTER(new RegisterCommand()),
-    MAIN(new MainPageCommand());
+    ALL_CARS(new ShowAvailableCarsCommand()),
+    ALL_FREE_AVAILABLE_CARS(new ShowFreeAndAvailableCars()),
+    FREE_AVAILABLE_BUSINESS_CARS(new ShowFreeAndAvailableBusinessCars()),
+    FREE_AVAILABLE_ECONOMY_CARS(new ShowFreeAndAvailableEconomyCars()),
+    FREE_AVAILABLE_PREMIUM_CARS(new ShowFreeAndAvailablePremiumCars()),
+    FREE_AVAILABLE_STATION_WAGON_CARS(new ShowFreeAndAvailableStationWagonCars()),
+    ECONOMY(new ShowEconomyCars()),
+    PREMIUM(new ShowPremiumCars()),
+    BUSINESS(new ShowBusinessCars()),
+    STATION_WAGON(new ShowStationWagonCars()),
+    GO_TO_LOGIN(new GoToLoginPage()),
+    GO_TO_REGISTRATION_PAGE(new GoToRegistrationPage()),
+    GO_TO_USER_PAGE(new GoToUsersPage()),
+    CHOOSE_CAR_COMMAND(new ChooseTheCarCommand()),
+    CHOOSE_CARD_PAYMENT_METHOD(new ChooseCardPaymentMethod()),
+    START_DRIVING(new StartDrivingCommand());
     private static Logger logger = LogManager.getLogger();
     private Command command;
 

@@ -9,9 +9,10 @@ public class User extends AbstractEntity {
     private String dateOfExpirity;
     private String drivingLicenseNumber;
     private String mail;
+
     private String pass;
     private int role;
-
+    private int accessLevel;
 
     public User(String name, String surName, String dateOfExpirity, String identificationNumber, String mail, String pass) {
         this.name = name;
@@ -20,11 +21,12 @@ public class User extends AbstractEntity {
         this.drivingLicenseNumber = identificationNumber;
         this.mail = mail;
         this.pass = pass;
-        this.role = UsersRole.CUSTOMER.ordinal();
+        this.role = Role.CUSTOMER.ordinal();
+        this.accessLevel=AccessLevel.FREE.ordinal();
     }
 
     public User() {
-        this.role = UsersRole.CUSTOMER.ordinal();
+        this.role = Role.CUSTOMER.ordinal();
     }
 
     public String getName() {
@@ -83,17 +85,25 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
+    public int getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return role == user.role && name.equals(user.name) && surName.equals(user.surName) && dateOfExpirity.equals(user.dateOfExpirity) && drivingLicenseNumber.equals(user.drivingLicenseNumber) && mail.equals(user.mail) && pass.equals(user.pass);
+        return role == user.role && accessLevel == user.accessLevel && Objects.equals(name, user.name) && Objects.equals(surName, user.surName) && Objects.equals(dateOfExpirity, user.dateOfExpirity) && Objects.equals(drivingLicenseNumber, user.drivingLicenseNumber) && Objects.equals(mail, user.mail) && Objects.equals(pass, user.pass);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surName, dateOfExpirity, drivingLicenseNumber, mail, pass, role);
+        return Objects.hash(name, surName, dateOfExpirity, drivingLicenseNumber, mail, pass, role, accessLevel);
     }
 
     @Override
@@ -102,10 +112,11 @@ public class User extends AbstractEntity {
                 .add("name='" + name + "'")
                 .add("surName='" + surName + "'")
                 .add("dateOfExpirity='" + dateOfExpirity + "'")
-                .add("identificationNumber='" + drivingLicenseNumber + "'")
+                .add("drivingLicenseNumber='" + drivingLicenseNumber + "'")
                 .add("mail='" + mail + "'")
                 .add("pass='" + pass + "'")
                 .add("role=" + role)
+                .add("accessLevel=" + accessLevel)
                 .toString();
     }
 }

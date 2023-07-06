@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>"Welcome!"
+<h1>"Welcome!" ${name}
+    ${level_name}
 </h1>
 <br/>
 <form action="controller" method="post"  >

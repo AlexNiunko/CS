@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class Car extends AbstractEntity{
-
     private String color;
     private String model;
     private String bodyType;
@@ -18,15 +17,16 @@ public class Car extends AbstractEntity{
     private Boolean currentStatus;
     private Boolean condition;
     private  String photo;
+    private ParkingPlace parkingPlace;
 
 
     public Car(){
         this.condition=true;
     }
 
-    public Car(java.lang.String color, java.lang.String model, String bodyType, int currentMileage,
-               java.lang.String registrationNumber, java.lang.String yearOfIssue, BigDecimal costPerMinute,
-               Boolean currentStatus, double engineVolume,String photo) {
+    public Car(String color, String model, String bodyType, int currentMileage,
+               String registrationNumber, String yearOfIssue, BigDecimal costPerMinute,
+               Boolean currentStatus, double engineVolume,String photo,String  parkingPlace) {
         this.color = color;
         this.model = model;
         this.bodyType = bodyType;
@@ -38,6 +38,7 @@ public class Car extends AbstractEntity{
         this.currentStatus = currentStatus;
         this.condition = true;
         this.photo=photo;
+        this.parkingPlace=ParkingPlace.valueOf(parkingPlace);
     }
 
     public String getPhoto() {
@@ -128,36 +129,43 @@ public class Car extends AbstractEntity{
         this.engineVolume = engineVolume;
     }
 
+    public ParkingPlace getParkingPlace() {
+        return parkingPlace;
+    }
+
+    public void setParkingPlace(String parkingPlace) {
+        this.parkingPlace = ParkingPlace.valueOf(parkingPlace);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Car car = (Car) o;
-        return currentMileage == car.currentMileage && Objects.equals(color, car.color) &&
-                Objects.equals(model, car.model) && bodyType == car.bodyType &&
-                Objects.equals(registrationNumber, car.registrationNumber) &&
-                Objects.equals(yearOfIssue, car.yearOfIssue) && Objects.equals(costPerMinute, car.costPerMinute) &&
-                Objects.equals(currentStatus, car.currentStatus) && Objects.equals(condition, car.condition);
+        return currentMileage == car.currentMileage && Double.compare(car.engineVolume, engineVolume) == 0 && Objects.equals(color, car.color) && Objects.equals(model, car.model) && Objects.equals(bodyType, car.bodyType) && Objects.equals(registrationNumber, car.registrationNumber) && Objects.equals(yearOfIssue, car.yearOfIssue) && Objects.equals(costPerMinute, car.costPerMinute) && Objects.equals(currentStatus, car.currentStatus) && Objects.equals(condition, car.condition) && Objects.equals(photo, car.photo) && parkingPlace == car.parkingPlace;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(color, model, bodyType, currentMileage, registrationNumber,
-                yearOfIssue, costPerMinute, currentStatus, condition);
+        return Objects.hash(super.hashCode(), color, model, bodyType, currentMileage, engineVolume, registrationNumber, yearOfIssue, costPerMinute, currentStatus, condition, photo, parkingPlace);
     }
 
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return new StringJoiner(", ", Car.class.getSimpleName() + "[", "]")
                 .add("color='" + color + "'")
                 .add("model='" + model + "'")
-                .add("bodyType=" + bodyType)
+                .add("bodyType='" + bodyType + "'")
                 .add("currentMileage=" + currentMileage)
+                .add("engineVolume=" + engineVolume)
                 .add("registrationNumber='" + registrationNumber + "'")
                 .add("yearOfIssue='" + yearOfIssue + "'")
                 .add("costPerMinute=" + costPerMinute)
                 .add("currentStatus=" + currentStatus)
                 .add("condition=" + condition)
+                .add("photo='" + photo + "'")
+                .add("parkingPlace=" + parkingPlace)
                 .toString();
     }
 }

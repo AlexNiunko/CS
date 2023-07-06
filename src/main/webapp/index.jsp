@@ -5,7 +5,7 @@
 <head>
     <title>JSP - Hello World</title>
 </head>
-<jsp:forward page="/controller?command=main"/>
+<jsp:forward page="/controller?command=all_cars"/>
 <body>
 </body>
 </html>
